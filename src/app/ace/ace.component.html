@@ -1,1 +1,49 @@
-<p>ace works!</p>
+<div id="ace-container">
+  <section class="hero is-light">
+    <div class="hero-body">
+      <div class="container columns">
+        <figure class="image is-128x128">
+          <img src="../../assets/images/favicon-256.png">
+        </figure>
+        <div style="padding-left: 10px;">
+          <p class="title">Enterprise Validator</p>
+          <p class="subtitle">
+            Now you can validate JSON and YAML easily!!<br/>
+            A YAML validator better than the <a href="http://www.yamllint.com">YAML Lint</a>.<br/>
+            A JSON validator and formatter that follows the JSON spec at <a href="http://json.org/">JSON.org</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <form class="form-inline" data-toggle="validator" role="form">
+        <button type="button" id="encodeData" class="btn btn-primary">BASE64 Encode</button>
+        <button type="button" id="decodeData" class="btn btn-warning">BASE64 Decode</button>
+        <button type="button" id="validateYamlData" class="btn btn-success">Validate YAML</button>
+        <button type="button" id="validateJsonData" class="btn btn-success">Validate JSON</button>
+        <button type="button" id="formatJsonData" class="btn btn-success">Format JSON</button>
+        <button type="button" id="formatXmlData" class="btn btn-success">Format XML</button>
+        <button type="button" id="shareByEmail" class="btn btn-info">Share Data</button>
+        <div class="form-group" style="min-width: 100%">
+                    <pre id="editor" style="height:75vh;">
+                    </pre>
+        </div>
+        <div id="validationResultBlock" tabindex="-1"></div>
+      </form>
+    </div>
+  </section>
+</div>
+<footer class="footer">
+  <div class="content has-text-centered">
+      <p>
+          Made with <span style="color: #e25555;">&#9829;</span> in India by
+          <a href="https://about.me/anandvarkeyphilips">Anand Varkey Philips</a>. The source code is
+          <a href="https://raw.githubusercontent.com/anandvarkeyphilips/enterprise-validator/master/LICENSE">MIT</a>
+          licensed and is available in <a href="https://github.com/anandvarkeyphilips/enterprise-validator">
+              <img src=".../../../assets/images/GitHub-Mark-32px.png"
+                  style="text-align: center; width: 1.2em; height: 1.2em;" /></a>.
+      </p>
+  </div>
+</footer>
