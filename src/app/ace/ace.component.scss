@@ -1,32 +1,45 @@
-body {
-    overflow: hidden;
-}
-#editor{
-    position: relative;
-    margin: 0;
-    top:  0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-}
 .failedGutter{
     background-color: #d60e0e !important;
 }
 
 .validation-message-failure{
     color: white;
-    padding: 10px;
-    background-color: red
+    padding: 1vh;
+    background-color: #d60e0e
 }
 
 .validation-message-error{
     color: black;
-    padding: 10px;
-    background-color: '#d2ab0e'
+    padding: 1vh;
+    background-color: #d2ab0e
 }
 
 .validation-message-success{
     color: white;
-    padding: 10px;
+    padding: 1vh;
     background-color: green
+}
+
+#ace-container {
+    margin:0px 0px 0px  0px;
+    .hero-body {
+        align-items: center;
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+    }
+    button {
+        margin-right: .1vh;
+    }
+    #editor{
+        height: 60vh;
+    } 
+    section {
+        padding: 0px 0px 0px 0px;
+    }
+}
+  
+footer {
+    text-align: center;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
 }

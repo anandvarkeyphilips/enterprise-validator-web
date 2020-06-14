@@ -5,8 +5,8 @@ import { AceComponent } from './ace/ace.component';
 
 
 const routes: Routes = [
-{ path: 'error', component: ErrorComponent },
-{ path: '**', component: AceComponent }
+  { path: 'error', component: ErrorComponent },
+  { path: '**', component: AceComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
