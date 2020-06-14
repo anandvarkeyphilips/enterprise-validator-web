@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "bootstrap": "^4.5.0",
+    "bulma": "^0.7.2",
     "jquery": "^3.5.1",
     "ng2-ace-editor": "^0.3.9",
     "rxjs": "~6.5.4",
