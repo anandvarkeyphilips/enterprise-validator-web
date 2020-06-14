@@ -1,45 +1,66 @@
-.failedGutter{
-    background-color: #d60e0e !important;
+.failedGutter {
+  background-color: #d60e0e !important;
 }
 
-.validation-message-failure{
-    color: white;
-    padding: 1vh;
-    background-color: #d60e0e
+#validationResultBlock-container {
+  width: 100%;
 }
 
-.validation-message-error{
-    color: black;
-    padding: 1vh;
-    background-color: #d2ab0e
+.validation-message-failure {
+  color: white;
+  height: 3vh;
+  background-color: #d60e0e;
 }
 
-.validation-message-success{
-    color: white;
-    padding: 1vh;
-    background-color: green
+.validation-message-error {
+  color: black;
+  height: 3vh;
+  background-color: #d2ab0e;
+}
+
+.validation-message-success {
+  color: white;
+  height: 3vh;
+  background-color: green;
 }
 
 #ace-container {
-    margin:0px 0px 0px  0px;
-    .hero-body {
-        align-items: center;
-        padding-top: 3vh;
-        padding-bottom: 3vh;
-    }
-    button {
-        margin-right: .1vh;
-    }
-    #editor{
-        height: 60vh;
-    } 
-    section {
-        padding: 0px 0px 0px 0px;
-    }
+  margin: 0px 0px 0px 0px;
+  .hero-body {
+    align-items: center;
+    padding: 1.2vh;
+  }
+  button {
+    border-color: #212529;
+  }
+  .btn-info{
+    color: #e9ecef;
+    background-color: #4a4a4a;
+  }
+  .btn-primary{
+    color: #e9ecef;
+    background-color: #26529a;
+  }
+  #editor {
+    height: 60vh;
+  }
+  section {
+    padding: 0px 0px 0px 0px;
+  }
 }
-  
+
 footer {
-    text-align: center;
-    padding-bottom: 3vh;
-    padding-top: 3vh;
+  text-align: center;
+  padding-bottom: 1vh;
+  padding-top: 3vh;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  padding: 1vh;
+}
+
+.title-wrapper {
+  padding-left: 10px;
 }

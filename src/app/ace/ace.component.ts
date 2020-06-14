@@ -14,7 +14,7 @@ export class AceComponent implements OnInit, AfterViewInit {
   @ViewChild('validationResultBlock') validationResultBlock;
 
   public message: String;
-  public isValidationSucess = true;
+  public isValidationSuccess = true;
   private baseUrl: String;
 
   constructor(configService: ConfigService, public aceService: AceService) {
@@ -68,21 +68,27 @@ management:
         this.message = data.validationMessage
         // this.editor.clearSelection();
         if (data.valid) {
-          this.isValidationSucess = true;
+          this.isValidationSuccess = true;
+          var newEditSession = this.editor._editor.session;
+          newEditSession.setAnnotations([]);
         } else {
-          this.isValidationSucess = false;
+          this.isValidationSuccess = false;
           if (data.lineNumber > 0) {
-            const errorLineNumber = data.lineNumber;
-            var newEditSession = this.editor.getSession();
-            newEditSession.addGutterDecoration((errorLineNumber - 1), "failedGutter");
-            this.editor.setSession(newEditSession);
-            this.editor.gotoLine(data.lineNumber, data.columnNumber, true);
+            const errorLineNumber = data.lineNumber - 1;
+            var newEditSession = this.editor._editor.session;
+            newEditSession.setAnnotations([{
+              row: errorLineNumber,
+              column: data.columnNumber,
+              text: "Error Message",
+              type: "error"
+            }]);
+            this.editor._editor.gotoLine(data.lineNumber, data.columnNumber, true);
           }
         }
         this.validationResultBlock.nativeElement.focus();
       }
     ),
-      (error) => this.isValidationSucess = true;
+      (error) => this.isValidationSuccess = true;
   }
 
   process(endpoint: string) {
