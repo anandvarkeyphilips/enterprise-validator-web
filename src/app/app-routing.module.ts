@@ -5,6 +5,7 @@ import { AceComponent } from './ace/ace.component';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'editor', pathMatch: 'full' },
   { path: 'editor', component: AceComponent },
   { path: '**', component: ErrorComponent }
 ];
