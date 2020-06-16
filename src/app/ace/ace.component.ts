@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { ConfigService } from '../app.config.service';
 import { Config } from 'protractor';
 import { AceService } from './ace.service';
@@ -6,36 +12,32 @@ import { AceService } from './ace.service';
 @Component({
   selector: 'app-ace',
   templateUrl: './ace.component.html',
-  styleUrls: ['./ace.component.scss']
+  styleUrls: ['./ace.component.scss'],
 })
 export class AceComponent implements OnInit, AfterViewInit {
-
   @ViewChild('editor') editor;
   @ViewChild('validationResultBlock') validationResultBlock;
 
-  public message: String;
+  public message: string;
   public isValidationSuccess = true;
-  private baseUrl: String;
+  private baseUrl: string;
 
   constructor(configService: ConfigService, public aceService: AceService) {
-    configService.getConfig()
-      .subscribe((data: Config) => {
-        this.baseUrl = data['baseUrl']
-      });
+    configService.getConfig().subscribe((data: Config) => {
+      this.baseUrl = data.baseUrl;
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.editor.getEditor().setOptions({
       showLineNumbers: true,
-      tabSize: 4
+      tabSize: 4,
     });
 
     this.editor.mode = 'yaml';
-    this.editor.value =
-      `server:
+    this.editor.value = `server:
   port: 8090
   servlet.context-path: /enterprise-validator
 logging:
@@ -53,42 +55,48 @@ management:
     shutdown.enabled: true`;
 
     this.editor.getEditor().commands.addCommand({
-      name: "showOtherCompletions",
-      bindKey: "Ctrl-.",
-      exec: function (editor) {
-
-      }
+      name: 'showOtherCompletions',
+      bindKey: 'Ctrl-.',
+      exec(editor) {},
     });
   }
 
   validate(inputMessage: string, url: string) {
-    this.aceService.validate(inputMessage, this.baseUrl + url).subscribe(
-      (data: any) => {
+    this.aceService
+      .validate(inputMessage, this.baseUrl + url)
+      .subscribe((data: any) => {
         this.editor.value = data.inputMessage;
-        this.message = data.validationMessage
+        this.message = data.validationMessage;
         // this.editor.clearSelection();
         if (data.valid) {
           this.isValidationSuccess = true;
-          var newEditSession = this.editor._editor.session;
+          const newEditSession = this.editor._editor.session;
           newEditSession.setAnnotations([]);
         } else {
           this.isValidationSuccess = false;
           if (data.lineNumber > 0) {
             const errorLineNumber = data.lineNumber - 1;
-            var newEditSession = this.editor._editor.session;
-            newEditSession.setAnnotations([{
-              row: errorLineNumber,
-              column: data.columnNumber,
-              text: "Error Message",
-              type: "error"
-            }]);
-            this.editor._editor.gotoLine(data.lineNumber, data.columnNumber, true);
+            const newEditSession = this.editor._editor.session;
+            newEditSession.setAnnotations([
+              {
+                row: errorLineNumber,
+                column: data.columnNumber,
+                text: 'Error Message',
+                type: 'error',
+              },
+            ]);
+            this.editor._editor.gotoLine(
+              data.lineNumber,
+              data.columnNumber,
+              true
+            );
           }
         }
         this.validationResultBlock.nativeElement.focus();
-      }
-    ),
-      (error) => this.isValidationSuccess = true;
+      },
+      (error) => {
+        this.isValidationSuccess = true;
+      });
   }
 
   process(endpoint: string) {
@@ -97,13 +105,18 @@ management:
 
   shareByEmail() {
     if (this.editor.value.length > 2000) {
-      alert("The maximum Data Size for sharing by email is 2000 chars for the time being!")
+      alert(
+        'The maximum Data Size for sharing by email is 2000 chars for the time being!'
+      );
       return false;
     }
-    var link = "mailto:" +
-      "?cc=anandvarkeyphilips@gmail.com" +
-      "&subject=" + escape("Data used for validation") +
-      "&body=" + escape(this.editor.value);
+    const link =
+      'mailto:' +
+      '?cc=anandvarkeyphilips@gmail.com' +
+      '&subject=' +
+      escape('Data used for validation') +
+      '&body=' +
+      escape(this.editor.value);
     window.location.href = link;
   }
 }
