@@ -11,9 +11,9 @@ export class AceService {
   constructor(private http: HttpClient) { }
 
   public validate(inputMessage: string, url: string): Observable<any> {
-    let header = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(url, {
-      "inputMessage": inputMessage
+      inputMessage
     },
       { headers: header }).pipe(
         catchError((err) => {

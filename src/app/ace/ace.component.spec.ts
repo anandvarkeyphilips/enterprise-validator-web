@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NO_ERRORS_SCHEMA, inject } from '@angular/core';
 import { ConfigService } from '../app.config.service';
@@ -9,15 +9,38 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { AceEditorModule } from 'ng2-ace-editor';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs';
+import { of, BehaviorSubject, Observable} from 'rxjs';
+import { throwError } from 'rxjs';
 
 describe('AceComponent', () => {
   let component: AceComponent;
   let fixture: ComponentFixture<AceComponent>;
   let httpTestingController: HttpTestingController;
   let service: AceService;
-  const childComponent = jasmine.createSpyObj('ace-editor', ['value']);
+  class ChildComponent{
+    commands = this;
+    // tslint:disable-next-line:variable-name
+    _editor = {
+      session: '',
+      gotoLine: (a) => this
+    };
+    setOptions(a){
+      return this;
+    }
+    getEditor(){
+      return this;
+    }
+    addCommand(a){
+      return this;
+    }
+  }
+
+  class AceServiceStub3 {
+    validate = () => {
+       return of({ valid: true,
+        lineNumber: 10});
+    }
+  }
   beforeEach(() => {
     const configServiceStub = () => ({
       getConfig: () => ({ subscribe: (f) => f({}) }),
@@ -25,20 +48,6 @@ describe('AceComponent', () => {
     const aceServiceStub = () => ({
       validate: (inputMessage, arg) => ({ subscribe: (f) => f({}) }),
     });
-    const aceServiceStub2 = jasmine.createSpyObj(['validate']);
-    aceServiceStub2.validate.and.returnValue(
-      of({
-        data: {
-          valid: 'true',
-        },
-      })
-    );
-
-    // const aceServiceStub = {
-    //   validate: jasmine
-    //     .createSpy('validate')
-    //     .and.returnValue( of({data: 'valid'}))
-    // };
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [AceComponent],
@@ -46,7 +55,7 @@ describe('AceComponent', () => {
       providers: [
         AceService,
         { provide: ConfigService, useFactory: configServiceStub },
-        // { provide: AceService, useValue: aceServiceStub2 },
+        { provide: AceService, useClass: AceServiceStub3 },
       ],
     });
     httpTestingController = TestBed.get(HttpTestingController);
@@ -69,66 +78,86 @@ describe('AceComponent', () => {
     expect(component.isValidationSuccess).toEqual(true);
   });
   it(`expect ngAfterViewInit havebeen called`, () => {
-    spyOn(component, 'ngAfterViewInit');
-    component.editor = childComponent;
-    component.editor.getEditor = () => {};
+    component.editor = new ChildComponent();
     spyOn(component.editor, 'getEditor').and.callThrough();
     component.editor.mode = 'yaml';
     component.editor.value = {};
     component.ngAfterViewInit();
-    expect(component.ngAfterViewInit).toHaveBeenCalled();
+    expect(component.editor.mode).toEqual('yaml');
   });
   it(`validate shareByEmail method`, () => {
-    component.editor = childComponent;
+    component.editor = new ChildComponent();
     component.editor.value = {};
     component.shareByEmail();
-    expect(window.location.href).toEqual('http://localhost:9876/context.html');
+    expect(window.location.href).toEqual('mailto:?cc=anandvarkeyphilips@gmail.com&subject=Data%20used%20for%20validation&body=%5Bobject%20Object%5D');
   });
   it(`test process method`, () => {
-    component.editor = childComponent;
+    component.editor = new ChildComponent();
     spyOn(component, 'validate').and.callThrough();
     spyOn(service, 'validate').and.returnValue(
       of({
-        data: {
           valid: 'true',
-        },
       })
     );
     component.editor.value = {};
     component.validationResultBlock = {
-      nativeElement: jasmine.createSpyObj('nativeElement', ['focus']),
+      nativeElement: jest.fn(),
     };
     component.process('');
     expect(component.validate).toHaveBeenCalled();
   });
   it(`test process method2`, () => {
-    component.editor = childComponent;
+    component.editor = new ChildComponent();
     spyOn(component, 'validate').and.callThrough();
     spyOn(service, 'validate').and.returnValue(
       of({
-        data: {
           valid: 'true',
-        },
       })
     );
     component.validationResultBlock = {
-      nativeElement: jasmine.createSpyObj('nativeElement', ['focus']),
+      nativeElement: jest.fn(),
     };
     component.process('');
     expect(component.validate).toHaveBeenCalled();
   });
   it(`test validate method2`, () => {
-    component.editor = childComponent;
+    component.editor = new ChildComponent();
     spyOn(component, 'validate').and.callThrough();
     spyOn(service, 'validate').and.returnValue(
       of({
-        data: {
           valid: 'true',
-        },
       })
     );
     component.validationResultBlock = {
-      nativeElement: jasmine.createSpyObj('nativeElement', ['focus']),
+      nativeElement: jest.fn(),
+    };
+    component.validate('', 'json');
+    expect(service.validate).toHaveBeenCalled();
+  });
+
+  it(`test validate method`, () => {
+    component.editor = new ChildComponent();
+    spyOn(component, 'validate').and.callThrough();
+    spyOn(service, 'validate').and.returnValue(
+      of({
+          valid: '',
+          lineNumber: 10
+      })
+    );
+    component.validationResultBlock = {
+      nativeElement: jest.fn(),
+    };
+    component.validate('', 'json');
+    expect(service.validate).toHaveBeenCalled();
+  });
+
+  it(`test validate method3`, () => {
+    component.editor = new ChildComponent();
+    spyOn(component, 'validate').and.callThrough();
+    spyOn(service, 'validate').and.returnValue(
+      throwError( ''));
+    component.validationResultBlock = {
+      nativeElement: jest.fn(),
     };
     component.validate('', 'json');
     expect(service.validate).toHaveBeenCalled();
@@ -140,7 +169,8 @@ describe('AceComponent', () => {
     const req = httpTestingController.expectNone('http://localhost:9876/yaml');
   });
   it(`validate shareByEmail method2`, () => {
-    component.editor = childComponent;
+    window.alert = jest.fn();
+    component.editor = new ChildComponent();
     component.editor.value = `server:
     port: 8090
     servlet.context-path: /enterprise-validator
@@ -277,7 +307,8 @@ describe('AceComponent', () => {
     endpoint:
       shutdown.enabled: true`;
     component.shareByEmail();
-    expect(window.location.href).toEqual('http://localhost:9876/context.html');
+    expect(window.location.href).toEqual('mailto:?cc=anandvarkeyphilips@gmail.com&subject=Data%20used%20for%20validation&body=%5Bobject%20Object%5D');
     expect(component.shareByEmail()).toEqual(false);
   });
 });
+

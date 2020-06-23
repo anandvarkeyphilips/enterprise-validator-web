@@ -54,11 +54,11 @@ management:
   endpoint:
     shutdown.enabled: true`;
 
-    this.editor.getEditor().commands.addCommand({
-      name: 'showOtherCompletions',
-      bindKey: 'Ctrl-.',
-      exec(editor) {},
-    });
+    // this.editor.getEditor().commands.addCommand({
+    //   name: 'showOtherCompletions',
+    //   bindKey: 'Ctrl-.',
+    //   exec(editor) {},
+    // });
   }
 
   validate(inputMessage: string, url: string) {

@@ -10,7 +10,7 @@ export class ConfigService {
     constructor(private http: HttpClient) { }
 
     getConfig() {
-        var p = this.http.get(this.configUrl);
+        const p = this.http.get(this.configUrl);
         return p;
     }
 }
