@@ -7,11 +7,8 @@ module.exports = {
   testMatch: ['**/+(*.)+(spec).+(ts|js)'],
   setupFilesAfterEnv: ['<rootDir>/src/test.ts'],
   collectCoverage: true,
-//   collectCoverageFrom: [
-//     "!src/app/error/*"
-// ],
-coveragePathIgnorePatterns:['src/app/error'],
-  coverageReporters: ['html'],
+  coveragePathIgnorePatterns:['src/app/error'],
+  coverageReporters: ['html', ["lcovonly", {"projectRoot": __dirname}], 'text-summary'],
   coverageDirectory: 'coverage/enterprise-validator-ui',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: '<rootDir>/'

@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewEncapsulation,
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
@@ -53,12 +52,6 @@ management:
     web.exposure.exclude: loggers
   endpoint:
     shutdown.enabled: true`;
-
-    // this.editor.getEditor().commands.addCommand({
-    //   name: 'showOtherCompletions',
-    //   bindKey: 'Ctrl-.',
-    //   exec(editor) {},
-    // });
   }
 
   validate(inputMessage: string, url: string) {
