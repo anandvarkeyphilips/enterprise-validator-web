@@ -5,7 +5,12 @@
 #validationResultBlock-container {
   width: 100%;
 }
-
+#validationResultBlock {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .validation-message-failure {
   color: white;
   height: 3vh;
@@ -27,19 +32,25 @@
 #ace-container {
   margin: 0px 0px 0px 0px;
   .hero-body {
-    align-items: center;
-    padding: 1.2vh;
+    padding: 1.2vh 0;
   }
   button {
-    border-color: #212529;
+    border-color: white;
+    border-radius: 0;
   }
-  .btn-info{
+  .btn-info {
     color: #e9ecef;
-    background-color: #4a4a4a;
+    background-color: #6c757d;
   }
-  .btn-primary{
+  .btn-primary {
     color: #e9ecef;
-    background-color: #26529a;
+    background-color: #00bcd4;
+  }
+  .btn-success {
+    background-color: #8bc34a;
+  }
+  .btn-warning {
+    background-color: #ffda3b;
   }
   #editor {
     height: 60vh;
@@ -57,10 +68,15 @@ footer {
 
 .title-container {
   display: flex;
-  justify-content: center;
-  padding: 1vh;
+  padding: 1vh 0;
 }
 
 .title-wrapper {
-  padding-left: 10px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding: 0.7rem;
+}
+.title {
+  margin: 0;
 }
