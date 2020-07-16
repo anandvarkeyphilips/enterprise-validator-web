@@ -9,7 +9,7 @@ module.exports = {
   collectCoverage: true,
   coveragePathIgnorePatterns:['src/app/error'],
   coverageReporters: ['html', ["lcovonly", {"projectRoot": __dirname}], 'text-summary'],
-  coverageDirectory: 'coverage/enterprise-validator-ui',
+  coverageDirectory: 'coverage/enterprise-validator-web',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: '<rootDir>/'
   })

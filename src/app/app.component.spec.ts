@@ -20,9 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'enterprise-validator-ui'`, () => {
+  it(`should have as title 'enterprise-validator-web'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('enterprise-validator-ui');
+    expect(app.title).toEqual('enterprise-validator-web');
   });
 });

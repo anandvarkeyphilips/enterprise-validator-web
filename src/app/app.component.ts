@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'enterprise-validator-ui';
+  title = 'enterprise-validator-web';
 }
