@@ -85,7 +85,6 @@ management:
             );
           }
         }
-        this.validationResultBlock.nativeElement.focus();
       },
       (error) => {
         this.isValidationSuccess = true;

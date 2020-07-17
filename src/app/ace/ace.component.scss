@@ -1,11 +1,17 @@
-.failedGutter {
-  background-color: #d60e0e !important;
+.title-container {
+  display: flex;
+  padding: 1vh 0;
 }
-
-#validationResultBlock-container {
+.title-wrapper {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding: 0.7rem;
+}
+#validation-result-block-container {
   width: 100%;
 }
-#validationResultBlock {
+#validation-result-block {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -16,19 +22,16 @@
   height: 3vh;
   background-color: #d60e0e;
 }
-
 .validation-message-error {
   color: black;
   height: 3vh;
   background-color: #d2ab0e;
 }
-
 .validation-message-success {
   color: white;
   height: 3vh;
   background-color: green;
 }
-
 #ace-container {
   margin: 0px 0px 0px 0px;
   .hero-body {
@@ -53,30 +56,20 @@
     background-color: #ffda3b;
   }
   #editor {
-    height: 60vh;
+    height: 62vh;
   }
   section {
     padding: 0px 0px 0px 0px;
   }
 }
-
 footer {
   text-align: center;
   padding-bottom: 1vh;
   padding-top: 3vh;
 }
-
-.title-container {
-  display: flex;
-  padding: 1vh 0;
+footer .span-love{
+  color: #e25555;
 }
-
-.title-wrapper {
-  justify-content: space-between;
-  display: flex;
-  flex-direction: column;
-  padding: 0.7rem;
-}
-.title {
-  margin: 0;
+footer .github-logo{
+  width: 1.2em; height: 1.2em;
 }

@@ -24,13 +24,11 @@
         <button type="button" id="decodeData" class="btn btn-primary" (click)="process('base64Decode')">BASE64 Decode</button>
         <button type="button" id="shareByEmail" class="btn btn-info" (click)="shareByEmail()">Share Data</button>
 
-        <ace-editor id="ace-editor" #editor style="height:65vh;"></ace-editor>
-        <div id="validationResultBlock-container" #validationResultBlock>
-          <div id="validationResultBlock"
+        <ace-editor id="editor" #editor></ace-editor>
+        <div id="validation-result-block-container">
+          <div id="validation-result-block"
                [class.validation-message-success]="isValidationSuccess"
-               [class.validation-message-failure]="!isValidationSuccess">
-            {{ message }}
-          </div>
+               [class.validation-message-failure]="!isValidationSuccess">{{ message }}</div>
         </div>
       </form>
     </div>
@@ -39,12 +37,13 @@
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      Made with <span style="color: #e25555;">&#9829;</span> in India by
+      Made with <span class="span-love">♥</span> in India by
       <a href="https://about.me/anandvarkeyphilips">Anand Varkey Philips</a>. The source code is
       <a href="https://raw.githubusercontent.com/anandvarkeyphilips/enterprise-validator/master/LICENSE">MIT</a>
-      licensed and is available in <a href="https://github.com/anandvarkeyphilips/enterprise-validator">
-      <img src=".../../../assets/images/GitHub-Mark-32px.png"  alt="GitHub logo"
-           style="text-align: center; width: 1.2em; height: 1.2em;" /></a>.
+      licensed and is available in
+      <a href="https://github.com/anandvarkeyphilips/enterprise-validator">
+        <img src=".../../../assets/images/GitHub-Mark-32px.png" class="github-logo" alt="GitHub logo"/>
+      </a>.
     </p>
   </div>
 </footer>
